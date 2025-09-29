@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using EfCorePostgresDemo.Models;
+using NAME_WIP_BACKEND.Models;
 
-namespace EfCorePostgresDemo.Data;
+namespace NAME_WIP_BACKEND.Data;
 
 public class AppDbContext : DbContext
 {
