@@ -18,7 +18,7 @@ namespace NAME_WIP_BACKEND.Controllers
         public AuthController(AppDbContext db)
         {
             _db = db;
-        }
+        }test
 
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserRegisterDto dto)
