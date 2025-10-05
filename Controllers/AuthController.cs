@@ -37,7 +37,7 @@ namespace NAME_WIP_BACKEND.Controllers
             _db.SaveChanges();
 
             return Ok(new { user.Id, user.Name, user.Email });
-        }
+        }test
 
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLoginDto dto)
