@@ -12,5 +12,5 @@ public class AppDbContext : DbContext
     public DbSet<User> Users => Set<User>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
-        => options.UseNpgsql(Environment.GetEnvironmentVariable("POSTGRES_CONN_STRING"));
+        => options.UseNpgsql(Environment.GetEnvironmentVariable("POSTGRES_CONN_STRING")?? throw new InvalidOperationException("JWT_SECRET not found in environment variables."));
 }
