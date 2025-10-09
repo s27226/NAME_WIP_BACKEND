@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using NAME_WIP_BACKEND.Data;
 using NAME_WIP_BACKEND.Models;
 
+[ExtendObjectType(Name = "Mutation")]
 public class AuthMutation
 {
     public async Task<AuthPayload> RegisterUser(

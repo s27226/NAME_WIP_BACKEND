@@ -5,14 +5,10 @@ public class Group
     public int Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Desc { get; set; }
-    public ICollection<UserGroup> Members { get; set; } = new List<UserGroup>();
+
+    public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
+    public ICollection<GroupInvitation> Invitations { get; set; } = new List<GroupInvitation>();
+    public ICollection<GroupRecommendation> Recommendations { get; set; } = new List<GroupRecommendation>();
+    public ICollection<Chat> Chats { get; set; } = new List<Chat>();
 }
 
-public class UserGroup
-{
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public int GroupId { get; set; }
-    public User User { get; set; } = null!;
-    public Group Group { get; set; } = null!;
-}
