@@ -28,6 +28,7 @@ public class AuthMutation
             Surname = input.Surname,
             Nickname = input.Nickname,
             Email = input.Email,
+            UserRoleId = 1,
             Password = BCrypt.Net.BCrypt.HashPassword(input.Password)
         };
 
