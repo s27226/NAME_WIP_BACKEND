@@ -58,7 +58,8 @@ app.UseRouting();
 
  using var scope = app.Services.CreateScope();
  var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
- db.Database.Migrate();
+DataInitializer.Seed(db);
+ //db.Database.Migrate();
 foreach (var user in db.Users)
 {
     Console.WriteLine($"{user.Id}: {user.Name}, {user.Surname}, {user.Nickname}, {user.Email}, {user.Password}");
