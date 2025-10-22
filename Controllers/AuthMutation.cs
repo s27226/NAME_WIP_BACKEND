@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using NAME_WIP_BACKEND.Data;
 using NAME_WIP_BACKEND.Models;
 
-[ExtendObjectType(Name = "Mutation")]
 public class AuthMutation
 {
     public async Task<AuthPayload> RegisterUser(
@@ -28,7 +27,6 @@ public class AuthMutation
             Surname = input.Surname,
             Nickname = input.Nickname,
             Email = input.Email,
-            UserRoleId = 1,
             Password = BCrypt.Net.BCrypt.HashPassword(input.Password)
         };
 
