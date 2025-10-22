@@ -7,7 +7,6 @@ using System.Security.Claims;
 using System.Text;
 using NAME_WIP_BACKEND.Migrations;
 
-// Plik przeznaczony do usunięcia w filnelnej wersji na razie zostawionyw razie czego
 namespace NAME_WIP_BACKEND.Controllers
 {
     [ApiController]

@@ -1,27 +1,11 @@
 ﻿using NAME_WIP_BACKEND.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using HotChocolate;
-using HotChocolate.AspNetCore;
-using NAME_WIP_BACKEND.Controllers;
-
 
 DotNetEnv.Env.Load();
-var builder = WebApplication.CreateBuilder(args);
-
+var builder = WebApplication.CreateBuilder();
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(Environment.GetEnvironmentVariable("POSTGRES_CONN_STRING")));
-
-
-builder.Services
-    .AddGraphQLServer()
-    .AddQueryType<Query>()
-    .AddMutationType<AuthMutation>()
-    .AddProjections()
-    .AddFiltering()
-    .AddSorting();
-
-
 builder.Services.AddControllers();
 builder.Services.AddAuthentication(options =>
 {
@@ -40,28 +24,16 @@ builder.Services.AddAuthentication(options =>
 });
 
 using var app = builder.Build();
-//
-
 
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.UseRouting();
-// app.Run();
+app.Run();
 
-//
-// 
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-
-
- using var scope = app.Services.CreateScope();
- var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
- db.Database.Migrate();
 foreach (var user in db.Users)
 {
     Console.WriteLine($"{user.Id}: {user.Name}, {user.Surname}, {user.Nickname}, {user.Email}, {user.Password}");
 }
-app.MapGraphQL("/");
-
-
-app.Run();
