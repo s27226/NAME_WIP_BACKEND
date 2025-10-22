@@ -21,6 +21,26 @@ namespace NAME_WIP_BACKEND.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("NAME_WIP_BACKEND.Models.Group", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Desc")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Group");
+                });
+
             modelBuilder.Entity("NAME_WIP_BACKEND.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -52,6 +72,58 @@ namespace NAME_WIP_BACKEND.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("NAME_WIP_BACKEND.Models.UserGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserGroup");
+                });
+
+            modelBuilder.Entity("NAME_WIP_BACKEND.Models.UserGroup", b =>
+                {
+                    b.HasOne("NAME_WIP_BACKEND.Models.Group", "Group")
+                        .WithMany("Members")
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NAME_WIP_BACKEND.Models.User", "User")
+                        .WithMany("UserGroups")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NAME_WIP_BACKEND.Models.Group", b =>
+                {
+                    b.Navigation("Members");
+                });
+
+            modelBuilder.Entity("NAME_WIP_BACKEND.Models.User", b =>
+                {
+                    b.Navigation("UserGroups");
                 });
 #pragma warning restore 612, 618
         }
