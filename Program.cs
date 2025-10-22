@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using HotChocolate;
 using HotChocolate.AspNetCore;
-using NAME_WIP_BACKEND;
 using NAME_WIP_BACKEND.Controllers;
 
 
@@ -17,8 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(Environ
 builder.Services
     .AddGraphQLServer()
     .AddQueryType<Query>()
-    .AddMutationType<Mutation>()
-    .AddTypeExtension<AuthMutation>()
+    .AddMutationType<AuthMutation>()
     .AddProjections()
     .AddFiltering()
     .AddSorting();

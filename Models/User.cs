@@ -1,14 +1,14 @@
 namespace NAME_WIP_BACKEND.Models;
 
 public class User
-{public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Surname { get; set; } = null!;
-    public string Nickname { get; set; } = null!;
-    public string Email { get; set; } = null!;
-    public string Password { get; set; } = null!;
-    public DateTime? DateOfBirth { get; set; }
-    public DateTime Joined { get; set; } = DateTime.UtcNow;
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = "";
+    public string Surname { get; set; } = "";
+    public string Nickname { get; set; } = "";
+    public string Email { get; set; } = "";
+    public string Password { get; set; } = "";
+    public ICollection<UserGroup> UserGroups { get; set; } = new List<UserGroup>();
 
     public int? UserRoleId { get; set; }
     public UserRole? UserRole { get; set; }
